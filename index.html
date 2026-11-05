@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Арианна | Самопрезентация</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            blue: '#1e3a8a',
+                            light: '#bfdbfe',
+                            accent: '#38bdf8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+       /* 1. Основной фон страницы: глубокий темный с фиолетово-зеленым переливом */
+body {
+  /* Градиент от темно-фиолетового к темно-изумрудному */
+  background: linear-gradient(135deg, #1e1b4b 0%, #2e1065 40%, #064e3b 100%);
+  background-attachment: fixed; /* Фон стоит на месте при скролле (выглядит дорого) */
+  color: #f3f4f6;
+  min-height: 100vh;
+}
+
+/* 2. Градиентный текст для акцентов (ваше Имя, главные заголовки) */
+.text-gradient {
+  /* Переход от нежно-фиолетового к яркому ментолово-зеленому */
+  background: linear-gradient(to right, #a78bfa, #34d399); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent; /* Фолбэк */
+}
+
+/* 3. Карточки в стиле Glassmorphism (для блоков "Обо мне" и "Глазами близких") */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  /* Добавляем постоянное лёгкое свечение */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4),
+              0 0 0 1px rgba(167, 139, 250, 0.1),
+              0 0 20px rgba(56, 189, 248, 0.08);
+  transition: all 0.35s ease;
+}
+
+/* Эффект при наведении (усиленная подсветка) */
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(52, 211, 153, 0.25),
+              0 0 0 1px rgba(52, 211, 153, 0.15),
+              0 0 30px rgba(52, 211, 153, 0.12);
+  transform: translateY(-3px);
+}
+
+/* 5. Декоративные светящиеся сферы для фона (разместите пустые div с этими классами на странице) */
+.glow-purple {
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  width: 400px;
+  height: 400px;
+  background: rgba(139, 92, 246, 0.25); /* Фиолетовое свечение */
+  filter: blur(120px);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.glow-green {
+  position: absolute;
+  bottom: 20%;
+  right: 10%;
+  width: 400px;
+  height: 400px;
+  background: rgba(16, 185, 129, 0.2); /* Зеленое свечение */
+  filter: blur(120px);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+/* Красивое фиолетово-зеленое выделение текста мышкой (бонус) */
+::selection {
+  background-color: rgba(167, 139, 250, 0.4); /* Полупрозрачный фиолетовый */
+  color: #fff;
+}
+
+/* ===== НОВОЕ: Выделение для навигации (header) ===== */
+.nav-header {
+  background: rgba(15, 23, 42, 0.55) !important;
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid rgba(167, 139, 250, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3),
+              0 1px 0 rgba(167, 139, 250, 0.15);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Ссылки в навигации — лёгкое свечение при наведении */
+.nav-header a {
+  position: relative;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.nav-header a:hover {
+  background: rgba(56, 189, 248, 0.12);
+  color: #fff !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
+}
+
+/* Активная ссылка (если нужно) */
+.nav-header a:active {
+  background: rgba(52, 211, 153, 0.2);
+}
+
+/* Скрытие хедера при скролле вниз */
+.header-hidden {
+  transform: translateY(-100%);
+}
+
+/* ===== НОВОЕ: Улучшенное выделение карточек ===== */
+.card-highlight {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Светящаяся полоска сверху карточки */
+.card-highlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #a78bfa, #34d399, transparent);
+  border-radius: 0 0 4px 4px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, left 0.3s ease, right 0.3s ease;
+}
+
+.card-highlight:hover::before {
+  opacity: 1;
+  left: 5%;
+  right: 5%;
+}
+
+/* Мягкое внутреннее свечение по краям */
+.card-highlight::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 30px rgba(167, 139, 250, 0.05),
+              inset 0 0 60px rgba(52, 211, 153, 0.03);
+  transition: box-shadow 0.35s ease;
+}
+
+.card-highlight:hover::after {
+  box-shadow: inset 0 0 40px rgba(52, 211, 153, 0.1),
+              inset 0 0 80px rgba(52, 211, 153, 0.05);
+}
+
+/* ===== Анимация появления ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+
+/* Плавное появление навигации */
+@keyframes navFadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+nav {
+  animation: navFadeIn 0.6s ease forwards;
+}
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-accent selection:text-white min-h-screen flex flex-col">
+
+    <!-- Navigation (Optional, for easy jumping during presentation) -->
+    <nav class="nav-header fixed w-full z-50 top-0">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-center space-x-6 text-sm md:text-base text-brand-light">
+            <a href="#hero" class="hover:text-white transition">Главная</a>
+            <a href="#about" class="hover:text-white transition">Обо мне</a>
+            <a href="#quotes" class="hover:text-white transition">Глазами близких</a>
+            <a href="#hobbies" class="hover:text-white transition">Увлечения</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-20">
+        
+        <!-- SECTION 1: Hero -->
+        <section id="hero" class="min-h-[90vh] flex items-center justify-center relative overflow-hidden">
+            <!-- Декоративные свечения -->
+            <div class="glow-purple"></div>
+            <div class="glow-green"></div>
+
+            <div class="max-w-4xl mx-auto px-4 text-center z-10 fade-up">
+                <!-- Profile Photo Placeholder -->
+                <div class="relative w-40 h-40 md:w-56 md:h-56 mx-auto mb-8 rounded-full p-1 bg-gradient-to-br from-brand-accent to-brand-blue shadow-2xl">
+                    <img src="img/44c9c38d-4806-4378-a26c-36fd5aa6c913.jpg" alt="Арианна" class="w-full h-full object-cover rounded-full border-4 border-slate-900">
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+                    Привет, я <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-blue-400">Арианна</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-300 font-light max-w-2xl mx-auto leading-relaxed">
+                    Пичуева Арианна Александровна. Группа 113. Представляю свой проект на тему себя.
+                </p>
+                
+                <div class="mt-10 animate-bounce">
+                    <a href="#about" class="text-brand-light hover:text-white opacity-70 hover:opacity-100 transition">
+                        <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: About Me -->
+        <section id="about" class="py-24 relative">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl md:text-5xl font-bold mb-16 text-center fade-up"><span class="border-b-4 border-brand-accent pb-2">Обо мне</span></h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="glass-card card-highlight p-8 rounded-3xl fade-up delay-100">
+                        <h3 class="text-2xl font-semibold mb-4 text-brand-light">Я как личность</h3>
+                        <p class="text-slate-300 leading-relaxed mb-6">
+                            Я Арианна, мне 16. Учусь в ЗабКУКе на хореографию. Я выбрала эту профессию по зову сердца.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            Опыт в танцах у меня ровно 10 лет и мой творческий путь начался как раз таки в стенах ЗаБКУКа. Сюда я начинала ходить на танцы, а дальше мой тренер создала студию, и я перешла к ней. С этого момента, я в танцах.
+                        </p>
+                    </div>
+                    
+                    <div class="space-y-6 fade-up delay-200">
+                        <h3 class="text-xl font-semibold text-center md:text-left text-brand-light mb-6">Мои навыки</h3>
+                        
+                        <!-- Skill 1 -->
+                        <div>
+                            <div class="flex justify-between mb-2 text-sm text-slate-300">
+                                <span>Личные навыки</span>
+                                <span>Коммуникабельность</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-3">
+                                <div class="bg-gradient-to-r from-blue-600 to-brand-accent h-3 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Skill 2 -->
+                        <div>
+                            <div class="flex justify-between mb-2 text-sm text-slate-300">
+                                <span>Кулинария</span>
+                                <span>Умение готовить</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-3">
+                                <div class="bg-gradient-to-r from-blue-600 to-brand-accent h-3 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 3 -->
+                        <div>
+                            <div class="flex justify-between mb-2 text-sm text-slate-300">
+                                <span>Ответственность и эмпатия</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-3">
+                                <div class="bg-gradient-to-r from-green-500 to-brand-accent h-3 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Through the eyes of others -->
+<section id="quotes" class="py-24 bg-black/20">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl md:text-5xl font-bold mb-16 text-center fade-up"><span class="border-b-4 border-brand-accent pb-2">Глазами близких</span></h2>
+        <p class="text-center text-slate-400 mb-12 max-w-2xl mx-auto fade-up">
+            Я спросила у своих друзей и семьи, с чем или с кем я у них ассоциируюсь. Вот что они ответили.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Quote Card 1 -->
+            <div class="glass-card card-highlight p-6 md:p-8 rounded-2xl transition-all duration-300 fade-up flex flex-col">
+                <!-- Блок для фото -->
+                <div class="w-full h-48 mb-6 overflow-hidden rounded-xl bg-white/5 shrink-0 border border-white/10">
+                    <img src="img/1.jpg" alt="Фото" class="w-full h-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+                </div>
+                
+                <svg class="w-8 h-8 text-brand-accent mb-4 opacity-50 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                <p class="text-lg italic text-slate-200 mb-4 grow">«Ты потрясающе танцуешь, с тобой комфортно, как дома, и ты умеешь оставаться собой несмотря ни на что. Твоя безграничная доброта и искренность — это то, что я ценю больше всего».</p>
+                <p class="text-sm text-brand-accent font-semibold mt-auto">— Ваня</p>
+            </div>
+
+            <!-- Quote Card 2 -->
+            <div class="glass-card card-highlight p-6 md:p-8 rounded-2xl transition-all duration-300 fade-up delay-100 flex flex-col">
+                <!-- Блок для фото -->
+                <div class="w-full h-48 mb-6 overflow-hidden rounded-xl bg-white/5 shrink-0 border border-white/10">
+                    <img src="img/2.jpg" alt="Фото" class="w-full h-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+                </div>
+
+                <svg class="w-8 h-8 text-brand-accent mb-4 opacity-50 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                <p class="text-lg italic text-slate-200 mb-4 grow">«Ты всегда легка на подъем и готова к любой активности. Но главное — ты потрясающе умеешь поддерживать и чувствуешь людей насквозь. С тобой связаны лучшие лагерные воспоминания!»</p>
+                <p class="text-sm text-brand-accent font-semibold mt-auto">— Света</p>
+            </div>
+
+            <!-- Quote Card 3 -->
+            <div class="glass-card card-highlight p-6 md:p-8 rounded-2xl transition-all duration-300 fade-up delay-200 flex flex-col">
+                <!-- Блок для фото -->
+                <div class="w-full h-48 mb-6 overflow-hidden rounded-xl bg-white/5 shrink-0 border border-white/10">
+                    <img src="img/3.jpg" alt="Фото" class="w-full h-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+                </div>
+
+                <svg class="w-8 h-8 text-brand-accent mb-4 opacity-50 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                <p class="text-lg italic text-slate-200 mb-4 grow">«Ты невероятно целеустремленная и ответственная — всегда добиваешься своего и идешь до конца. Но для меня ты навсегда останешься той самой девочкой с белыми кудряшками, которой я горжусь каждый раз, когда вижу твои горящие глаза на сцене».</p>
+                <p class="text-sm text-brand-accent font-semibold mt-auto">— Мама</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- SECTION 4: Hobbies -->
+        <section id="hobbies" class="py-24 relative">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl md:text-5xl font-bold mb-16 text-center fade-up"><span class="border-b-4 border-brand-accent pb-2">Мои увлечения</span></h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    
+                    <!-- Hobby 1 -->
+                    <div class="glass-card card-highlight p-6 rounded-2xl fade-up">
+                        <div class="w-24 h-24 mx-auto bg-slate-800/50 rounded-full flex items-center justify-center mb-6 border border-slate-700 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+                            <!-- Dance Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64"><defs><linearGradient id="danceGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#A78BFA" /><stop offset="100%" stop-color="#34D399" /></linearGradient></defs><circle cx="12" cy="3.5" r="2.5" fill="url(#danceGradient)" /><path d="M11 6.5 C 8.5 9.5, 9.5 12.5, 12 14.5 L 12.5 21.5 M 12 14.5 L 17 10 L 21 13 M 11 6.5 L 6 10 L 4 6 M 11 6.5 L 17 5 L 20 2" fill="none" stroke="url(#danceGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M4 15 C 2 13, 2 10, 4 8" fill="none" stroke="rgba(52, 211, 153, 0.4)" stroke-width="1.5" stroke-linecap="round" /><path d="M19 18 C 21 16, 21 13, 19 11" fill="none" stroke="rgba(167, 139, 250, 0.4)" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Современная хореография</h3>
+                        <p class="text-slate-400 text-sm">Очень люблю заниматься стилем танца - Контемпорари</p>
+                    </div>
+
+                    <!-- Hobby 2 -->
+                    <div class="glass-card card-highlight p-6 rounded-2xl fade-up delay-100">
+                        <div class="w-24 h-24 mx-auto bg-slate-800/50 rounded-full flex items-center justify-center mb-6 border border-slate-700 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+                            <!-- Music Icon -->
+                            <svg class="w-10 h-10 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Музыка</h3>
+                        <p class="text-slate-400 text-sm">Люблю слушать музыку и представлять сценарии под нее. Я меломан.</p>
+                    </div>
+
+                    <!-- Hobby 3 -->
+                    <div class="glass-card card-highlight p-6 rounded-2xl fade-up delay-200">
+                        <div class="w-24 h-24 mx-auto bg-slate-800/50 rounded-full flex items-center justify-center mb-6 border border-slate-700 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+                            <!-- Gamepad Icon -->
+                            <svg class="w-10 h-10 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Игровая индустрия</h3>
+                        <p class="text-slate-400 text-sm">Гейминг не только как отдых, но и продумывание стратегий в поле игры.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-4 max-w-6xl mx-auto flex flex-col items-center">
+    
+    <!-- Заголовок по центру -->
+    <h2 class="text-4xl md:text-5xl font-bold text-center text-white mb-12">
+        Лучшие моменты <span class="text-gradient">в моей жизни</span>
+    </h2>
+
+    <!-- Видео по центру -->
+    <div class="w-full max-w-md glass-card p-3 rounded-2xl">
+        <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden">
+            <iframe 
+                src="https://player.vimeo.com/video/1243759237?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                frameborder="0" 
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                class="absolute top-0 left-0 w-full h-full" 
+                title="IMG_4721">
+            </iframe>
+        </div>
+    </div>
+
+</section>
+
+        <section class="py-20 text-center fade-up">
+            <h2 class="text-2xl md:text-4xl font-light mb-8">Готова к новым вызовам и проектам.</h2>
+            <p class="text-brand-accent text-lg">Спасибо за внимание!</p>
+        </section>
+
+    </main>
+
+    <footer class="bg-black/40 py-6 text-center text-slate-500 text-sm">
+        <p>© 2026 Арианна.</p>
+    </footer>
+
+    <!-- Scripts for animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for fade-up animations on scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            const animatedElements = document.querySelectorAll('.fade-up');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+
+        // Скрытие/показ хедера при скролле
+        let lastScrollTop = 0;
+        const header = document.querySelector('nav');
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > 80) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+    </script>
+</body>
+</html>
